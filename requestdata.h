@@ -1,16 +1,16 @@
 #ifndef REQUESTDATA_H
 #define REQUESTDATA_H
 #include "constant.h"
-#include <vector>
+#include <array>
 
 class RequestData
 {
 public:
     RequestData();
-    RequestData(std::vector<int>);
-    void setData(std::vector<int>);
+    RequestData(std::array<int,Constant::ResourceTypeNum>);
+    void setData(std::array<int,Constant::ResourceTypeNum>);
 private:
-    std::vector<int> resourceNeed;
+    std::array<int,Constant::ResourceTypeNum> resourceNeed;
 };
 
 #endif // REQUESTDATA_H

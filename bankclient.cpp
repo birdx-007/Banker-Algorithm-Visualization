@@ -9,7 +9,7 @@ BankClient::BankClient()
     this->sprite.load(QString(":/Sprites/BankClient.png"));
 }
 
-void BankClient::submitRequest(std::vector<int> need)
+void BankClient::submitRequest(std::array<int,Constant::ResourceTypeNum> need)
 {
     this->request.setData(need);
     this->notify(this->clientIndex,this->request);

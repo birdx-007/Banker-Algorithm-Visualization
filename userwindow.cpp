@@ -1,13 +1,15 @@
 #include "userwindow.h"
 #include "ui_userwindow.h"
 #include <QPainter>
+#include <QIcon>
 
 UserWindow::UserWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::UserWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle(QString("Welcome, Banker 014!  ^_^"));
+    this->setWindowTitle(QString("Welcome, Banker 007!"));
+    this->setWindowIcon(QIcon(":/Sprites/Bank.png"));
     canvas=QPixmap(Constant::CanvasWidth,Constant::CanvasHeight);
 }
 

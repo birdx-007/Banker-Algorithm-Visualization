@@ -7,6 +7,7 @@ Engine::Engine(UserWindow* window)
     {
         this->clients.push_back(BankClient());
         this->clients[i].setPosition(100,100+i*125,-90);
+        this->clients[i].attachObserver(&bank);
     }
     this->userWindow=window;
     this->timer=new QTimer(this);
@@ -20,7 +21,7 @@ Engine::Engine(UserWindow* window)
 
 void Engine::onUpdate()
 {
-    for(int i=0;i<Constant::MaxClientNum;i++)
+    for(int i=0;i<(int)this->clients.size();i++)
     {
         this->userWindow->paintCanvas(this->clients[i]);
     }

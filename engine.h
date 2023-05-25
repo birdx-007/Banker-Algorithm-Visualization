@@ -2,6 +2,8 @@
 #define ENGINE_H
 #include "userwindow.h"
 #include "bankclient.h"
+#include "bank.h"
+#include "bankmanager.h"
 #include <QObject>
 #include <QTimer>
 
@@ -11,6 +13,7 @@ public:
     Engine(UserWindow*);
     void onUpdate();
     std::vector<BankClient> clients;
+    Bank bank;
 private:
     QTimer* timer;
     UserWindow* userWindow;

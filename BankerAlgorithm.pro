@@ -19,7 +19,9 @@ SOURCES += \
     Interfaces/idataobserver.cpp \
     Interfaces/idatasubject.cpp \
     Interfaces/ipaintable.cpp \
+    bank.cpp \
     bankclient.cpp \
+    bankmanager.cpp \
     engine.cpp \
     main.cpp \
     requestdata.cpp \
@@ -29,7 +31,9 @@ HEADERS += \
     Interfaces/idataobserver.h \
     Interfaces/idatasubject.h \
     Interfaces/ipaintable.h \
+    bank.h \
     bankclient.h \
+    bankmanager.h \
     constant.h \
     engine.h \
     requestdata.h \
