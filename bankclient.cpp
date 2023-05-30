@@ -15,3 +15,8 @@ void BankClient::submitRequest(std::array<int,Constant::ResourceTypeNum> need)
     this->notify(this->clientIndex,this->request);
 }
 
+void BankClient::returnResource()
+{
+    this->notify();
+}
+

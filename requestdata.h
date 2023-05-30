@@ -6,6 +6,7 @@
 class RequestData
 {
 public:
+    friend class BankManager;
     RequestData();
     RequestData(std::array<int,Constant::ResourceTypeNum>);
     void setData(std::array<int,Constant::ResourceTypeNum>);

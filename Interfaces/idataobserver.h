@@ -8,6 +8,7 @@ class IDataObserver
 public:
     IDataObserver();
     virtual void onNotify(int index, RequestData request) = 0;
+    virtual void onNotify() = 0;
 };
 
 #endif // IDATAOBSERVER_H

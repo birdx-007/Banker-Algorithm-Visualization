@@ -39,3 +39,8 @@ void IDataSubject::notify(int index, RequestData request)
         }
     }
 }
+
+void IDataSubject::notify()
+{
+
+}

@@ -8,6 +8,7 @@ class BankClient : public IDataSubject, public IPaintable
 public:
     BankClient();
     void submitRequest(std::array<int,Constant::ResourceTypeNum> need);
+    void returnResource();
     static int clientNum;
     int clientIndex;
 private:

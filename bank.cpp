@@ -2,11 +2,15 @@
 
 Bank::Bank()
 {
-    this->max.reserve(Constant::MaxClientNum);
-    this->allocation.reserve(Constant::MaxClientNum);
+    manager.setDataAccess(&data);
 }
 
 void Bank::onNotify(int index, RequestData request)
+{
+
+}
+
+void Bank::onNotify()
 {
 
 }

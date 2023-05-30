@@ -21,6 +21,7 @@ SOURCES += \
     Interfaces/ipaintable.cpp \
     bank.cpp \
     bankclient.cpp \
+    bankdata.cpp \
     bankmanager.cpp \
     engine.cpp \
     main.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     Interfaces/ipaintable.h \
     bank.h \
     bankclient.h \
+    bankdata.h \
     bankmanager.h \
     constant.h \
     engine.h \
