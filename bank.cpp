@@ -1,4 +1,5 @@
 #include "bank.h"
+#include <QApplication>
 
 Bank::Bank()
 {
@@ -9,7 +10,6 @@ Bank::Bank()
 QString Bank::getDisplayContent()
 {
     QString displayContent;
-    displayContent.append(QString(" Bank\n\n"));
     displayContent.append(QString(" Available:\n"));
     for(int j=0;j<Constant::ResourceTypeNum;j++)
     {
@@ -82,9 +82,9 @@ void Bank::paint(QPainter *painter)
     }
 }
 
-void Bank::onNotify(int index, RequestData request)
+void Bank::onNotify(int index, RequestData request) //客户请求资源
 {
-    if(index>=(int)this->data.allocation.size()) // 银行尚未收录该客户请求
+    if(index>=(int)this->data.allocation.size()) // 银行尚未收录该客户
     {
         this->data.max.push_back(request.getData());
         this->data.allocation.push_back(std::array<int,Constant::ResourceTypeNum>());
@@ -105,7 +105,7 @@ void Bank::onNotify(int index) //客户归还资源
 {
     if(index>=(int)this->data.allocation.size()) // 银行尚未收录该客户请求
     {
-        qDebug()<<"Error: Client"<<index<<"is not in the bank data. Return resources failed!";
+        qDebug()<<"Warning: Client"<<index<<"is not in the bank data. Return resources failed!";
         return;
     }
     for(int j=0;j<Constant::ResourceTypeNum;j++)
@@ -114,4 +114,31 @@ void Bank::onNotify(int index) //客户归还资源
         this->data.max[index][j] = this->data.need[index][j] = this->data.allocation[index][j] = 0;
     }
     qDebug()<<"Client"<<index<<"return resources to the bank.";
+}
+
+void Bank::selfCheck()
+{
+    if(data.max.size()!=data.allocation.size())
+    {
+        qDebug()<<"Error: Max and Allocation should have the same row number.";
+        qApp->quit();
+    }
+    if(data.need.size()!=data.max.size())
+    {
+        data.need=data.max;
+    }
+    for(int i=0;i<(int)this->data.need.size();i++)
+    {
+        for(int j=0;j<Constant::ResourceTypeNum;j++)
+        {
+            data.need[i][j]=data.max[i][j]-data.allocation[i][j];
+        }
+    }
+    bool isSafe=manager.safetyCheck();
+    if(!isSafe)
+    {
+        qDebug()<<"Error: Self check not safe!";
+        qApp->quit();
+    }
+    qDebug()<<"Bank self check ends. Everything works fine.";
 }

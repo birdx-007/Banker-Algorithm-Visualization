@@ -15,9 +15,10 @@ bool BankManager::safetyCheck()
     const int clientNumber = dataAccess->allocation.size();
     std::vector<bool> finish(false,clientNumber);
     std::array<int,Constant::ResourceTypeNum> work(dataAccess->available);
-    bool existAllocatableClient = false;
+    bool existAllocatableClient;
     do
     {
+        existAllocatableClient = false;
         int i,j;
         for(i=0;i<clientNumber;i++)
         {
@@ -29,6 +30,10 @@ bool BankManager::safetyCheck()
                     existAllocatableClient = true;
                     break;
                 }
+            }
+            if(existAllocatableClient)
+            {
+                break;
             }
         }
         if(existAllocatableClient)

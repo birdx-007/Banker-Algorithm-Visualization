@@ -11,6 +11,7 @@ class Engine : QObject
 {
 public:
     Engine(UserWindow*);
+    void simulationInitiate();
     void onUpdate();
     std::vector<BankClient> clients;
     Bank bank;

@@ -15,6 +15,7 @@ public:
     virtual void paint(QPainter *painter) override;
     virtual void onNotify(int index, RequestData request) override;
     virtual void onNotify(int index) override;
+    void selfCheck();
     BankData data;
 private:
     BankManager manager;
