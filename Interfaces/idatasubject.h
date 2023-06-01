@@ -12,7 +12,7 @@ public:
     void attachObserver(IDataObserver*);
     void detachObserver(IDataObserver*);
     void notify(int index, RequestData request);
-    void notify();
+    void notify(int index);
 private:
     std::vector<IDataObserver*> observers;
 };
