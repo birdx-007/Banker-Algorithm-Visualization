@@ -10,6 +10,7 @@ public:
     RequestData();
     RequestData(std::array<int,Constant::ResourceTypeNum>);
     void setData(std::array<int,Constant::ResourceTypeNum>);
+    std::array<int,Constant::ResourceTypeNum> getData();
 private:
     std::array<int,Constant::ResourceTypeNum> resourceNeed;
 };

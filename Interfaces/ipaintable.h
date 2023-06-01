@@ -1,5 +1,6 @@
 #ifndef IPAINTABLE_H
 #define IPAINTABLE_H
+#include <QDebug>
 #include <QObject>
 #include <QPainter>
 #include <QPixmap>
@@ -8,6 +9,7 @@ class IPaintable
 {
 public:
     IPaintable();
+    virtual QString getDisplayContent() = 0;
     virtual void paint(QPainter* painter);
     virtual void setPosition(qreal cx,qreal cy,qreal angleDeg);
     bool isValid;

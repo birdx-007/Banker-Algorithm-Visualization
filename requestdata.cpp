@@ -3,6 +3,7 @@
 
 RequestData::RequestData()
 {
+    resourceNeed.fill(0);
 }
 
 RequestData::RequestData(std::array<int,Constant::ResourceTypeNum> need)
@@ -16,4 +17,9 @@ void RequestData::setData(std::array<int,Constant::ResourceTypeNum> need)
     {
         resourceNeed[i]=need[i];
     }
+}
+
+std::array<int, Constant::ResourceTypeNum> RequestData::getData()
+{
+    return resourceNeed;
 }

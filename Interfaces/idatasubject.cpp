@@ -40,7 +40,13 @@ void IDataSubject::notify(int index, RequestData request)
     }
 }
 
-void IDataSubject::notify()
+void IDataSubject::notify(int index)
 {
-
+    for(auto o:observers)
+    {
+        if(o!=nullptr)
+        {
+            o->onNotify(index);
+        }
+    }
 }
