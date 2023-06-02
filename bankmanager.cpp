@@ -13,32 +13,37 @@ void BankManager::setDataAccess(BankData *access)
 bool BankManager::safetyCheck()
 {
     const int clientNumber = dataAccess->allocation.size();
-    std::vector<bool> finish(false,clientNumber);
+    std::vector<bool> finish(clientNumber,false);
     std::array<int,Constant::ResourceTypeNum> work(dataAccess->available);
     bool existAllocatableClient;
+    int allocatableClientIndex;
     do
     {
-        existAllocatableClient = false;
         int i,j;
         for(i=0;i<clientNumber;i++)
         {
+            existAllocatableClient = true;
             for(j=0;j<Constant::ResourceTypeNum;j++)
             {
                 bool condition = finish[i]==false && dataAccess->need[i][j]<=work[j];
-                if(condition)
+                if(!condition)
                 {
-                    existAllocatableClient = true;
+                    existAllocatableClient = false;
                     break;
                 }
             }
             if(existAllocatableClient)
             {
+                allocatableClientIndex = i;
                 break;
             }
         }
         if(existAllocatableClient)
         {
-            work[j]=work[j]+dataAccess->allocation[i][j];
+            for(j=0;j<Constant::ResourceTypeNum;j++)
+            {
+                work[j]=work[j]+dataAccess->allocation[allocatableClientIndex][j];
+            }
             finish[i]=true;
         }
     }

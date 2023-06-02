@@ -18,9 +18,12 @@ public:
     UserWindow(QWidget *parent = nullptr);
     ~UserWindow();
     virtual void paintEvent(QPaintEvent *) override;
+    virtual void keyPressEvent(QKeyEvent *event) override;
     void paintCanvas(IPaintable&);
 private:
     QPixmap canvas;
     Ui::UserWindow *ui;
+signals:
+    void keyEnterPressed();
 };
 #endif // WIDGET_H

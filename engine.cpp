@@ -6,13 +6,14 @@ Engine::Engine(UserWindow* window)
     for(int i=0;i<Constant::MaxClientNum;i++)
     {
         this->clients.push_back(BankClient());
-        this->clients[i].setPosition(100,100+i*125,-90);
+        this->clients[i].setPosition(150,100+i*125,-90);
         this->clients[i].attachObserver(&bank);
         this->clients[i].setDataAccess(&bank.data);
     }
     bank.setPosition(725,100,-90);
     simulationInitiate();
     this->userWindow=window;
+    connect(this->userWindow,SIGNAL(keyEnterPressed()),this,SLOT(onUserWindowKeyEnterPressed()));
     this->timer=new QTimer(this);
     this->timer->setInterval(20);
     connect(this->timer,&QTimer::timeout,[=]()
@@ -41,6 +42,27 @@ void Engine::simulationInitiate()
     bank.selfCheck();
 }
 
+void Engine::simulationStepForward()
+{
+    switch (step)
+    {
+    case 0:
+        clients[1].submitRequest({1,0,2});
+        break;
+    case 1:
+        clients[4].submitRequest({3,3,0});
+        break;
+    case 2:
+        clients[0].submitRequest({0,2,0});
+        break;
+    default:
+        qDebug()<<"Warning: Simulation has come to the end.";
+        step--;
+        break;
+    }
+    step++;
+}
+
 void Engine::onUpdate()
 {
     for(int i=0;i<(int)this->clients.size();i++)
@@ -49,4 +71,10 @@ void Engine::onUpdate()
     }
     this->userWindow->paintCanvas(this->bank);
     this->userWindow->update();
+}
+
+void Engine::onUserWindowKeyEnterPressed()
+{
+    //qDebug()<<"Slot triggered: onUserWindowKeyEnterPressed().";
+    simulationStepForward();
 }
